@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+        Corona Virus Api
+      {% endblock %}
+    </title>
+    <meta name="description" content="corona virus api or Covid-19 api">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="author" content="tumzied">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+
+<style media="screen">
+
+
+a.navbar-brand {
+  font-weight: lighter;
+  border-block-end-color: inherit;
+  border: 0 solid;
+  /* border-color: #8e5470; */
+  border-radius: 87px;
+  padding: 10px;
+  font-weight: 600;
+  /* text-transform: lowercase !important; */
+  color:rgb(111, 201, 150) !important
+
+}
+
+div#navbarTogglerDemo03 {
+    list-style: none;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(34, 34, 34)!important;
+    animation: fadein 2s forwards;
+}
+
+section{
+    margin-top: 10px;
+    color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+    min-height: 100vh;
+
+
+
+}
+
+section h1{
+    color:rgb(111, 201, 150) !important
+}
+@keyframes fadein {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+footer{
+    color:wheat;
+    min-height: 25px;
+    text-align: center;
+}
+textarea {
+  width: 100%;
+  min-height: 30rem;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  background: rgb(34, 34, 34)
+}
+pre{
+  /* color: #e83e8c; */
+  color: white;
+  padding: 10px;
+    background: #252525;
+
+}
+hr{
+  margin-top: 2rem;
+    margin-bottom: 2rem;
+    border: 0;
+    /* height: 2px; */
+    width: 100%;
+    /* border-top: 10px solid rgb(236, 46, 46); */
+    /* background: radial-gradient(black, #22222273); */
+    box-shadow: 0px 0px 20px 2px #000000;
+}
+
+</style>
+ <nav class="navbar navbar-expand-lg " style="background-color: rgb(34, 34, 34)!important;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="">Covid-Api</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+
+<!-- <li class="nav-item">
+    <a class="nav-link " href="">Demo Project</a>
+</li> -->
+
+    </ul>
+
+  </div>
+</nav>
+
+
+<!-- <form class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form> -->
+<!--
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+
+  {%url 'services:emergency_medicin_request_list' as emergency_medicin_request_list%}
+
+  <a class="nav-link {%if request.get_full_path == emergency_medicin_request_list%}active{%endif%}" href="{%url 'services:emergency_medicin_request_list'%}">Medicine</a>
+  {% endif %} -->
+    {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+  {% endif %}
+
+
+
+    <section class="section-main">
+        <div class="title">
+            <h1>Corona Virus Api</h1>
+
+        </div>
+        <div class="discription" style="text-align:center; padding:10px">
+          Hi, i am  Tumzied ,developer of this api.
+          <br>
+          Currently This api is still on development.
+          <br>
+          Here is a littel examples of  data structure of this api
+
+        </div>
+
+        <div class="aj" style="color:pink">
+  <pre>
+  <code>
+
+
+[
+
+  {
+     "country_name":"USA",
+     "total_cases":"277,475",
+     "total_death":"7,402",
+     "total_recover":"12,283",
+     "active_cases":"257,790",
+     "total_case_per_minion_pop":"838",
+     "total_death_per_minion_pop":"22",
+     "create":"2020-04-04",
+     "new_case":314,
+     "new_death":10
+  },
+   .
+   .
+   .
+]
+</code>
+</pre>
+<p class="">
+  To get all the Countries Data
+</p>
+check out this link :
+  <a class="" href='{%url 'main_api:getalldata'%}' style="color:white">
+    {{request.scheme}}://{{request.get_host}}{%url 'main_api:getalldata'%}
+  </a>
+</div>
+<hr>
+<div class="" style="margin-top:10px">
+<h5>
+  You can also get a spisific Country data
+</h5>
+here is the examples
+<pre>
+  <code>
+    {
+       "new_cases":[
+          {
+             "new_cases":314,
+             "new_death":10,
+             "date":"04-04-2020"
+          }
+       ],
+       "country_name":"USA",
+       "new_case":314,
+       "new_death":10,
+       "total_cases":"277,475",
+       "total_death":"7,402",
+       "total_recover":"12,283",
+       "active_cases":"257,790",
+       "total_case_per_minion_pop":"838",
+       "total_death_per_minion_pop":"22"
+    }
+  </code>
+
+
+</pre>
+<div class="" style="color:pink">
+  check out this link :
+  <a class="" href='{%url 'main_api:getcountry' name='usa'%}' style="color:white">
+    {{request.scheme}}://{{request.get_host}}{%url 'main_api:getcountry' name='usa'%}
+  </a>
+</div>
+
+</div>
+
+
+    </section>
+<hr>
+<footer >
+    2020@Covid-Api
+</footer>
+  </body>
+</html>
