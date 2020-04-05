@@ -26,7 +26,7 @@ form{
 </div>
 <div class="main">
   <form class="form" action="" method="post">
-     {% csrf_token %} 
+     {% csrf_token %}
     {{form.as_ul  }}
     <li>
 
@@ -37,10 +37,16 @@ form{
 
 <div class="right-section" style=" margin-top:20px">
 
+<div class="" style="">
+ <a href="{%url 'main:createcase' id=object_id %}">Create new CASE</a>
+
+</div>
+
 {%for case in new_cases%}
 <li style="">
   {{case.date}}
   <a href="../update/case/id={{case.id}}">update</a>
+  <a href="{%url 'main:deletecase' country_id=object_id case_id=case.pk %} ">delete</a>
 </li>
 {%endfor%}
 </div>

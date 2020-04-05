@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import  Http404
 from .forms import  Country_form,NewCasesForm
 # Create your views here.
@@ -10,7 +10,7 @@ def homeview(request):
 
 def is_superuser(call):
     def function_wraper(request, **args):
-        print('hello fuc wraper')
+        # print('hello fuc wraper')
         if request.user.is_superuser :
             return call(request, **args)
         raise Http404
@@ -54,9 +54,9 @@ def updateCountry(request,id):
     ctx={
     'form':form,
     'new_cases':obj.new_cases.all(),
+    'object_id':obj.id
     }
     return render(request,'main/updates.html',ctx)
-
 
 @is_superuser
 def updateNewCase(request,id):
@@ -73,6 +73,36 @@ def updateNewCase(request,id):
         })
     ctx={
     'form':form,
-    'date':obj.date
+    'date':obj.date,
+
     }
     return render(request,'main/updateCases.html',ctx);
+
+@is_superuser
+def CreateNewCase(request,id):
+    if request.method=='POST':
+        c_obj=Country.objects.get(id=id)
+        form=NewCasesForm(request.POST)
+        if form.is_valid():
+            obj=form.save(commit=False)
+            obj.country=c_obj
+            obj.save()
+            c_obj.new_cases.add(obj)
+
+    else:
+        form=NewCasesForm()
+    ctx={'form':form}
+    return render(request,'main/updateCases.html',ctx);
+
+@is_superuser
+def deleteCase(request,country_id,case_id):
+    try:
+        obj=Country.objects.get(id=country_id)
+        # print(obj)
+        caseobj=NewCases.objects.get(id=case_id)
+
+        obj.new_cases.remove(caseobj)
+        pass
+    except :
+        print('cant delete')
+    return redirect('main:update',id=country_id)
