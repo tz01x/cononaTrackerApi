@@ -34,7 +34,7 @@ def updateCountry(request,id):
 
     obj=Country.objects.get(id=id)
     if request.method=='POST':
-        form=Country_form(request.POST)
+        form=Country_form(request.POST,instance=obj)
         if form.is_valid():
             obj=form.save(commit=False)
             obj.save()
@@ -62,7 +62,7 @@ def updateCountry(request,id):
 def updateNewCase(request,id):
     obj=NewCases.objects.get(id=id)
     if request.method=='POST':
-        form=NewCasesForm(request.POST)
+        form=NewCasesForm(request.POST,instance=obj)
         if form.is_valid():
             obj=form.save(commit=False)
             obj.save()
