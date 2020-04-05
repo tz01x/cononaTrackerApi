@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load pwa %}
+<head>
+	<title></title>
+  {% progressive_web_app_meta %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="{%static 'js/material.min.js'%}"></script>
+
+	<style media="screen">
+	body{
+
+		background: #f7fbfb;
+	}
+
+	</style>
+</head>
+<body>
+
+
+
+
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header" style="background-color: rgb(55, 60, 86);">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Covid-Tracker</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="{%url 'frontend:home'%}">All Data</a>
+      </nav>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+        <label class="mdl-button mdl-js-button mdl-button--icon"
+               for="fixed-header-drawer-exp">
+          <i class="material-icons" id='search_btn'>search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+          <input class="mdl-textfield__input" type="text" name="sample"
+                 id="fixed-header-drawer-exp">
+        </div>
+      </div>
+
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Covid-Tracker</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="{%url 'frontend:home'%}">home</a>
+
+      <a class="mdl-navigation__link" href="{%url  'main:apihome'%}">Api</a>
+
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here -->
+
+      {% block content %}
+
+      {% endblock %}
+    </div>
+		<footer class="mdl-mini-footer">
+		<div class="mdl-mini-footer__left-section">
+			<div class="mdl-logo">Cobid-Tracker</div>
+			<ul class="mdl-mini-footer__link-list">
+				<li><a href="{%url 'frontend:about'%}">About</a></li>
+				<!-- <li><a href="#">Privacy & Terms</a></li> -->
+			</ul>
+		</div>
+	</footer>
+  </main>
+
+</div>
+
+
+
+</body>
+</html>

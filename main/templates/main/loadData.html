@@ -1,0 +1,42 @@
+{%extends 'main/index.html'%}
+{%load static%}
+{%block body%}
+<style media="screen">
+  #searchinput{
+    border: 0;
+    border-radius: 10px;
+    text-align: center;
+    outline: none;
+  }
+  #searchbtn{
+    border: 0;
+    outline: none;
+    height: 28px;
+border-radius: 10px;
+text-shadow: 0px 1px 1px black;
+background: aquamarine;
+margin: 1px;
+
+      }
+</style>
+<section>
+  <div class="titel">
+    <h1>All Country</h1>
+    <form class="" action="" method="get">
+      <input type="text" name="c" value="" id='searchinput'>
+      <input type="submit" name="" value="search" id='searchbtn'>
+    </form>
+  </div>
+  <div class="">
+    {%for object in objects%}
+
+  <div class="item" style="padding: 5px;margin: 5px">
+    <a href="../update/id={{object.id}}">view</a>
+    {{object}}
+
+  </div>
+    {%endfor%}
+  </div>
+</section>
+
+{%endblock body%}

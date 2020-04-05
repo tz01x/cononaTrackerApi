@@ -67,8 +67,8 @@ class NewCases(models.Model):
     country=models.ForeignKey(Country,on_delete=models.CASCADE)
     new_cases=models.IntegerField()
     new_death=models.IntegerField()
-    date=models.DateField(auto_now=True,db_index=True)
+    date=models.DateField(auto_now_add=True,db_index=True)
     class Meta:
-            ordering = ['-date']
+            ordering = ['date']
     def  __str__(self):
         return str(self.country)

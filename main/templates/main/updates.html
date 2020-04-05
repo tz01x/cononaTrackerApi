@@ -1,0 +1,48 @@
+{%extends 'main/index.html'%}
+
+{%load static%}
+
+{%block body%}
+
+<style media="screen">
+form{
+  list-style: none;
+}
+  li{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+    border: 0;
+    border-radius: 4px;
+    text-align: center;
+}
+</style>
+<section>
+
+<div class="left-section">
+
+</div>
+<div class="main">
+  <form class="form" action="" method="post">
+    {{form.as_ul  }}
+    <li>
+
+      <input type="submit" name="updates" value="submit">
+    </li>
+  </form>
+</div>
+
+<div class="right-section" style=" margin-top:20px">
+
+{%for case in new_cases%}
+<li style="">
+  {{case.date}}
+  <a href="../update/case/id={{case.id}}">update</a>
+</li>
+{%endfor%}
+</div>
+
+</section>
+{%endblock body%}

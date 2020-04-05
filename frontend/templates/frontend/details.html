@@ -1,0 +1,196 @@
+
+{%extends 'base2.html'%}
+{% load static %}
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<style media="screen">
+.bodyheader{
+  text-align: center;
+}
+#title {
+  text-align: center;
+}
+.t{
+  text-align: center;
+  margin-top: 10px;
+  font-size: 37px;
+  padding: 10px;
+line-height: 1;
+}
+.cst{
+  font-weight: bold;
+  text-shadow: 0px 1px 1px black;
+
+}
+.dt{
+
+    font-size: 47px;
+    /* font-weight: 700; */
+    margin: 13px;
+    color: #656564;
+
+
+}
+.t.nd{
+  font-size: 34px;
+    padding: 7px;
+    /* margin: 15px; */
+    font-weight: 700;
+    color: darkgray;
+}
+.ncs{
+  font-weight: 700;
+    font-size: 54px;
+
+}
+.ret{
+
+    font-size: 43px;
+    padding: 2px;
+    font-weight: 700;
+    text-shadow: 0px 2px 2px black;
+
+}
+.nre{
+  padding: 10px;
+font-size: 57px;
+/* margin: 42px; */
+/* margin-top: 40px; */
+font-weight: 600;
+color: #70ec51;
+text-shadow: 0px 0.5px 3px #061f0b;
+}
+</style>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+ <div class="mdl-cell mdl-cell--1-col"></div>
+
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+    <div class="main-section"  id='main'>
+<div class="bodyheader">
+
+  Last updated: {{qs.create}}
+</div>
+      <div class="title">
+        <h1 id='title'>
+
+          {{qs}}
+        </h1>
+
+      </div>
+      <div class="body">
+        <div class="t cs">
+          <div class="cst">
+
+            Coronavirus Cases:
+          </div>
+          <div class="t ncs">
+
+            {{qs.total_cases}}
+          </div>
+        </div>
+        <div class="t d">
+          <div class="dt">
+            Deaths:
+
+          </div>
+          <div class="t nd">
+
+            {{qs.total_death}}
+          </div>
+        </div>
+        <div class="t re">
+          <div class="ret">
+            Total Recovered:
+
+          </div>
+          <div class="t nre">
+            {{qs.total_recover}}
+          </div>
+        </div>
+        <h3>Daily New Cases in {{qs}}</h3>
+        <canvas id="myChart_new_case"></canvas>
+        <br>
+        <h3>Daily New Death in {{qs}}</h3>
+        <canvas id="myChart_new_death"></canvas>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+</div>
+<script type="text/javascript">
+let title  ='{{qs.country_name}}';
+//
+if(title!=null){
+  fetchChartdata();
+
+    fetch(`https://restcountries.eu/rest/v2/name/${title}?fullText=true`).then(res=>{
+      if (res.ok){
+        return res.json()
+      }
+      else {
+        alert('cant fatch flag')
+        // console.log(cant fatch flag);
+      }
+    }).then(data=>{
+      // console.log(data);
+      let countrycode=data[0].alpha2Code;
+      document.getElementById('title').innerHTML+=`<img src="https://www.countryflags.io/${countrycode}/flat/64.png">`
+    });
+}
+
+function fetchChartdata(){
+  fetch(`{{request.scheme}}://{{request.get_host}}/api/get-data/country=${title}/`).then(res=>{
+    if (res.ok){
+      return res.json()
+    }
+  }).then(data=>{
+
+    console.log(data);
+    createChart(
+      data.labels,
+      data.new_cases,
+      'myChart_new_case',
+      'Daily New Cases'
+    );
+    createChart(
+      data.labels,
+      data.new_death,
+      'myChart_new_death',
+      'Daily New Deaths'
+    )
+      // data.new_death,
+  });
+}
+
+
+
+function createChart(labels,data,id,label){
+var ctx = document.getElementById(id).getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: labels,
+        datasets: [{
+            label: label,
+            // backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: data
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+}
+</script>
+{% endblock content %}

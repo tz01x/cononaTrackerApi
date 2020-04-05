@@ -1,3 +1,7 @@
+{% load pwa %}
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -7,6 +11,9 @@
         Corona Virus Api
       {% endblock %}
     </title>
+
+    {% progressive_web_app_meta %}
+    
     <meta name="description" content="corona virus api or Covid-19 api">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="author" content="tumzied">
@@ -150,7 +157,7 @@ hr{
   {% endif %}
 
 
-
+{%block body%}
     <section class="section-main">
         <div class="title">
             <h1>Corona Virus Api</h1>
@@ -172,18 +179,18 @@ hr{
 
 [
 
-  {
-     "country_name":"USA",
-     "total_cases":"277,475",
-     "total_death":"7,402",
-     "total_recover":"12,283",
-     "active_cases":"257,790",
-     "total_case_per_minion_pop":"838",
-     "total_death_per_minion_pop":"22",
-     "create":"2020-04-04",
-     "new_case":314,
-     "new_death":10
-  },
+    {
+       "country_name":"USA",
+       "total_cases":"311,637",
+       "total_death":"8,454",
+       "total_recover":"14,828",
+       "active_cases":"288,355",
+       "total_case_per_minion_pop":"941",
+       "total_death_per_minion_pop":"26",
+       "create":"2020-04-05",
+       "new_case":280,
+       "new_death":2
+    },
    .
    .
    .
@@ -207,22 +214,41 @@ here is the examples
 <pre>
   <code>
     {
-       "new_cases":[
-          {
-             "new_cases":314,
-             "new_death":10,
-             "date":"04-04-2020"
-          }
+       "data":{
+          "new_cases":[
+             {
+                "new_cases":314,
+                "new_death":10,
+                "date":"04-04-2020"
+             },
+             {
+                "new_cases":280,
+                "new_death":2,
+                "date":"05-04-2020"
+             }
+          ],
+          "country_name":"USA",
+          "new_case":280,
+          "new_death":2,
+          "total_cases":"311,637",
+          "total_death":"8,454",
+          "total_recover":"14,828",
+          "active_cases":"288,355",
+          "total_case_per_minion_pop":"941",
+          "total_death_per_minion_pop":"26"
+       },
+       "labels":[
+          "04 Apr",
+          "05 Apr"
        ],
-       "country_name":"USA",
-       "new_case":314,
-       "new_death":10,
-       "total_cases":"277,475",
-       "total_death":"7,402",
-       "total_recover":"12,283",
-       "active_cases":"257,790",
-       "total_case_per_minion_pop":"838",
-       "total_death_per_minion_pop":"22"
+       "new_cases":[
+          314,
+          280
+       ],
+       "new_death":[
+          10,
+          2
+       ]
     }
   </code>
 
@@ -240,8 +266,14 @@ here is the examples
 
     </section>
 <hr>
-<footer >
+{%endblock body%}
+
+<footer style="margin-top:10px">
     2020@Covid-Api
+    <br>
+
+    <a href="{%url 'frontend:about'%}">About</a>
+
 </footer>
   </body>
 </html>

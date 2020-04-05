@@ -21,4 +21,6 @@ urlpatterns = [
     path('',include('main.urls')),
     path('api/',include('main.api.urls')),
     path('login/',include('user.api.urls')),
+     path('', include('pwa.urls')),
+     path('',include('frontend.urls'))
 ]

@@ -1,0 +1,300 @@
+
+{%extends 'base2.html'%}
+{% load static %}
+{% block content %}
+<style media="screen">
+.cards {
+    box-shadow: 0px 0px 5px 0px black, inset 0px -1px 1px 0px black;
+    border: 0px;
+    border-radius: 15px;
+}
+.card-header {
+    padding: 2px;
+    text-align: center;
+    border-bottom: 1px solid #66339926;
+}
+.mui-row {
+    display: flex;
+}
+.mui-col-xs-6 {
+  /* flex-grow: 1; */
+  height: 27px;
+  width: 50%;
+  /* text-align: center; */
+  border-left: 1px solid #00000075;
+  border-right: 1px solid #00000075;
+
+}
+.mui-col-text {
+    padding: 10px;
+    margin: 3px 0px 0px 2px;
+}
+.number{
+  text-decoration: underline;
+text-decoration-color: red;
+text-decoration-style: wavy;
+}
+
+.pure-material-progress-circular {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 50%;
+    padding: 0.25em;
+    width: 3em;
+    height: 3em;
+    color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    background-color: transparent;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.pure-material-progress-circular::-webkit-progress-bar {
+    background-color: transparent;
+}
+
+/* Indeterminate */
+.pure-material-progress-circular:indeterminate {
+    -webkit-mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
+    mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
+    animation: pure-material-progress-circular 6s infinite cubic-bezier(0.3, 0.6, 1, 1);
+}
+
+:-ms-lang(x), .pure-material-progress-circular:indeterminate {
+    animation: none;
+}
+
+.pure-material-progress-circular:indeterminate::before,
+.pure-material-progress-circular:indeterminate::-webkit-progress-value {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 0.25em;
+    border: solid 0.25em transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    width: 100% !important;
+    height: 100%;
+    background-color: transparent;
+    animation: pure-material-progress-circular-pseudo 0.75s infinite linear alternate;
+}
+
+.pure-material-progress-circular:indeterminate::-moz-progress-bar {
+    box-sizing: border-box;
+    border: solid 0.25em transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    animation: pure-material-progress-circular-pseudo 0.75s infinite linear alternate;
+}
+
+.pure-material-progress-circular:indeterminate::-ms-fill {
+    animation-name: -ms-ring;
+}
+
+@keyframes pure-material-progress-circular {
+    0% {
+        transform: rotate(0deg);
+    }
+    12.5% {
+        transform: rotate(180deg);
+        animation-timing-function: linear;
+    }
+    25% {
+        transform: rotate(630deg);
+    }
+    37.5% {
+        transform: rotate(810deg);
+        animation-timing-function: linear;
+    }
+    50% {
+        transform: rotate(1260deg);
+    }
+    62.5% {
+        transform: rotate(1440deg);
+        animation-timing-function: linear;
+    }
+    75% {
+        transform: rotate(1890deg);
+    }
+    87.5% {
+        transform: rotate(2070deg);
+        animation-timing-function: linear;
+    }
+    100% {
+        transform: rotate(2520deg);
+    }
+}
+
+@keyframes pure-material-progress-circular-pseudo {
+    0% {
+        transform: rotate(-30deg);
+    }
+    29.4% {
+        border-left-color: transparent;
+    }
+    29.41% {
+        border-left-color: currentColor;
+    }
+    64.7% {
+        border-bottom-color: transparent;
+    }
+    64.71% {
+        border-bottom-color: currentColor;
+    }
+    100% {
+        border-left-color: currentColor;
+        border-bottom-color: currentColor;
+        transform: rotate(225deg);
+    }
+}
+
+</style>
+
+
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--1-col"></div>
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+
+  </div>
+
+  <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+
+    <div class="main-section"  id='main'>
+      <div class="" style=" text-align:center">
+        <progress class="pure-material-progress-circular" id='progress-bar' style="display:inline-block" />
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+
+  </div>
+</div>
+<script type="text/javascript">
+function cardhtml(country_name,new_case,new_death,total_cases,total_death,i){
+  let card=`
+  <div class="cards" key='${i}'>
+    <div class="card-header">
+  <h5>
+  <a href="/details/${country_name}">
+  ${country_name}
+  </a>
+  </h5>
+  </div>
+  <div class="card-body">
+
+    <div class="mui-row">
+        <div class="mui-col-xs-6">
+
+          <div class="mui-col-text">
+          New Cases : <strong class='number'>+${new_case} </strong>
+          </div>
+
+        </div>
+        <div class="mui-col-xs-6">
+
+          <div class="mui-col-text">
+            New Death : <strong class='number'>+${new_death}</strong>
+          </div>
+        </div>
+    </div>
+    <div class="mui-row">
+        <div class="mui-col-xs-6">
+        <div class="mui-col-text">
+          Total Cases: ${total_cases}
+        </div>
+
+        </div>
+        <div class="mui-col-xs-6">
+        <div class="mui-col-text">
+        Total Death: ${total_death}
+        </div>
+
+
+        </div>
+    </div>
+<div style="height:10px"></div>
+
+  </div>
+  </div>
+  <br>
+  `
+  return card
+}
+
+//main section refereance
+let mainSection=document.getElementById('main');
+featchallData();
+//set timeout for loding to gone
+setTimeout(function(){
+      document.getElementById('progress-bar').style.display='none';
+},5000)
+
+//listenign to Enter evetn on Search input fild
+document.getElementById('fixed-header-drawer-exp').addEventListener('keyup',function (event) {
+  if (event.keyCode === 13) {
+   // Cancel the default action, if needed
+   event.preventDefault();
+   // Trigger the button element with a click
+   search_for_val(event.target.value);
+ }
+});
+
+document.getElementById('search_btn').addEventListener('click',function(event){
+let data=document.getElementById('fixed-header-drawer-exp').value ;
+  search_for_val(data)
+});
+//search value
+function search_for_val(val) {
+if(val.length<=1){
+  return;
+}
+fetch(`{{request.scheme}}://{{request.get_host}}/api/get-data/country=${val}/`).then(res=>{
+  if(res.ok===true){
+    return res.json();
+  }else {
+    alert('No data found');
+  }
+
+}).then(item=>{
+  console.log(item);
+  item=item.data;
+  mainSection.innerHTML=cardhtml(item.country_name,item.new_case,item.new_death,item.total_cases,item.total_death,1);
+}).catch(()=>{
+
+});
+}
+//fatch data
+function featchallData(){
+  fetch("{{request.scheme}}://{{request.get_host}}{%url 'main_api:getalldata'%}").then(function(res){
+    return res.json()
+  }).then(function(data){
+  //  console.log();
+    data.forEach((item, i) => {
+      mainSection.innerHTML+=cardhtml(item.country_name,item.new_case,item.new_death,item.total_cases,item.total_death,i);
+    });
+
+
+
+
+  });
+}
+// country_name: "Bangladesh"
+// new_case: 9
+// new_death: 2
+// total_cases: "70"
+// total_death: "8"
+// total_recover: "26"
+// active_cases: "36"
+// total_case_per_minion_pop: "0.4"
+// total_death_per_minion_pop: "0.05"
+</script>
+{% endblock content %}

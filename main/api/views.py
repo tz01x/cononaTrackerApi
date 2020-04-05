@@ -25,17 +25,34 @@ class MyMessagesView2(generics.ListCreateAPIView):
         # .filter(user=request.user)
         serializer = CountrySerilis(queryset,many=True)
         return Response(serializer.data)
-
+import json
 @api_view(['GET'])
 @permission_classes([])
 def CountryDetails(request,name):
     qs=Country.objects.filter(Q(country_name__icontains=name))
-    if qs:
-        s=CountrySerializerDetails(qs[0])
 
-        return Response(s.data)
+
+    if qs:
+        newcases=qs[0].new_cases.all()
+        labels=[]
+        cases_nam=[]
+        death_nam=[]
+        for case in newcases:
+            labels.append(case.date.strftime("%d %b"))
+            cases_nam.append(case.new_cases)
+            death_nam.append(case.new_death)
+        s=CountrySerializerDetails(qs[0])
+        # return Response(json.dumps(s.data))
+
+        return Response({"data":s.data,
+        "labels":labels,
+        "new_cases":cases_nam,
+        "new_death":death_nam})
     else:
         return Response({'detail':'no data found'},status=status.HTTP_404_NOT_FOUND)
+
+
+
 
 
 import json,io

@@ -17,5 +17,6 @@ url='http://127.0.0.1:8000/api/create_data/'
 headers={
 'Authorization':'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InR6MDF4IiwiZXhwIjoxNTg2NTIzNTY3LCJlbWFpbCI6ImFiZHVyOTYzcmFobWFuQGdtYWlsLmNvbSJ9.q9EDZfJB5mIv717N64VvucDK-TGwQvlO4W4Ww4pJGiY'
 }
-res=requests.post(url,data,headers=headers)
-print(res.text)
+# res=requests.post(url,data,headers=headers)
+res=requests.get('http://127.0.0.1:8000/api/get-data/country=usa/');
+print(res.json())

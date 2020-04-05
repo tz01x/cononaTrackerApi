@@ -40,7 +40,10 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'main',
-    'user'
+    'user',
+    'pwa',
+    'frontend'
+
 
 ]
 
@@ -127,3 +130,4 @@ USE_TZ = True
 from .dev_settings import  *
 from .cors_header import  *
 from .restSetting import  *
+from .pwa_settings import  *
