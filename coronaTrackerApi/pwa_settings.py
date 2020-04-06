@@ -1,7 +1,7 @@
 
 
 
-PWA_APP_NAME = 'COVID-Traker'
+PWA_APP_NAME = 'COVID-Tracker'
 PWA_APP_DESCRIPTION = "keep track of all confirmed and suspected cases of coronavirus, along with recovered patients and deaths."
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
