@@ -1,8 +1,8 @@
 
 
 
-PWA_APP_NAME = 'Corona Traker'
-PWA_APP_DESCRIPTION = "My app description"
+PWA_APP_NAME = 'COVID-Traker'
+PWA_APP_DESCRIPTION = "keep track of all confirmed and suspected cases of coronavirus, along with recovered patients and deaths."
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
@@ -11,13 +11,13 @@ PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/'
 PWA_APP_ICONS = [
     {
-        'src': '/static/images/my_app_icon.png',
+        'src': '/static/images/myapp_icon.png',
         'sizes': '160x160'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
-        'src': '/static/images/my_apple_icon.png',
+        'src': '/static/images/myapp_icon.png',
         'sizes': '160x160'
     }
 ]
