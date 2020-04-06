@@ -55,7 +55,7 @@ def CountryDetails(request,name):
 
 
 
-import json,io
+import json,io,datetime
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createMessage(request):
@@ -75,16 +75,24 @@ def createMessage(request):
             obj.new_case=data.get('new_cases')
             obj.new_death=data.get('new_death')
             obj.save()
-            newcases=NewCases.objects.create(
-            country=obj,
-            new_cases=data.get('new_cases'),
-            new_death=data.get('new_death')
-            )
-            obj.new_cases.add(newcases)
+            if obj.new_cases.all().last().date==datetime.datetime.now().date():
+                # update today cases
+                last_new_case=obj.new_cases.all().last()
+                last_new_case.new_cases=obj.new_case
+                last_new_case.new_death=obj.new_death
+                last_new_case.save()
+            else:
+                #create new one
+                newcases=NewCases.objects.create(
+                country=obj,
+                new_cases=data.get('new_cases'),
+                new_death=data.get('new_death')
+                )
+                obj.new_cases.add(newcases)
 
 
-    except Exception as e:
-        raise
+    except:
+        return Response({'details':'error'},status=status.HTTP_200_OK)
     return Response({'details':'created'},status=status.HTTP_200_OK)
 #     uid=None
 #     text=None
