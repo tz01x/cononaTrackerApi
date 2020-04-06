@@ -3,8 +3,19 @@
 {% load static %}
 {% load pwa %}
 <head>
-	<title></title>
+	<title>
+		{%block title%}
+		Coronavirus Updates
+		{%endblock title%}
+	</title>
+
+	<meta name="description" content="keep track of all confirmed and suspected cases of coronavirus, along with recovered patients and deaths.
+	 The data is visualized through a chart.The coronavirus COVID-19 is affecting 208 countries and territories around the world and 2 international conveyances.
+	">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="author" content="tumzied">
   {% progressive_web_app_meta %}
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

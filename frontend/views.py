@@ -4,7 +4,17 @@ from main.models import  Country
 from django.views import generic
 # Create your views here.
 def display(request):
-    return render(request,'frontend/home.html')
+    ctx={}
+    try:
+
+        qs=Country.objects.get(country_name__icontains='World')
+        ctx={
+        'total_cases':qs.total_cases,
+        'total_death':qs.total_death,
+        }
+    except:
+        pass
+    return render(request,'frontend/home.html',ctx)
 def details(request,name):
     try:
         qs=Country.objects.get(country_name=name)
