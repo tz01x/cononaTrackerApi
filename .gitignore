@@ -89,7 +89,7 @@ media/
 local_settings.py
 .media
 .env
-
+db.sqlite3
 static_root/
 
 

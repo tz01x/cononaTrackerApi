@@ -12,6 +12,16 @@ COVID-19 update : {{total_cases}} cases and {{total_death}} deaths
     border: 0px;
     border-radius: 15px;
     min-height: 158px;
+    animation: feidin 2s forwards;
+}
+
+@keyframes feidin {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 .card-header {
     padding: 2px;
@@ -64,7 +74,7 @@ text-decoration-style: wavy;
 .pure-material-progress-circular:indeterminate {
     -webkit-mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
     mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
-    animation: pure-material-progress-circular 6s infinite cubic-bezier(0.3, 0.6, 1, 1);
+    animation: pure-material-progress-circular 3s infinite cubic-bezier(0.3, 0.6, 1, 1);
 }
 
 :-ms-lang(x), .pure-material-progress-circular:indeterminate {

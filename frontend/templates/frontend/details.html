@@ -4,6 +4,17 @@
 {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style media="screen">
+#main{
+  animation: faidin 2s ;
+}
+@keyframes faidin {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
 .bodyheader{
   text-align: center;
 }
@@ -134,7 +145,7 @@ if(title!=null){
         return res.json()
       }
       else {
-        alert('cant fatch flag')
+        // alert('cant fatch flag')
         // console.log(cant fatch flag);
       }
     }).then(data=>{
