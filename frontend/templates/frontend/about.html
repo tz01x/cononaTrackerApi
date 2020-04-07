@@ -1,35 +1,82 @@
 {%extends 'base2.html'%}
+{% load widget_tweaks %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
  <div class="mdl-cell mdl-cell--1-col"></div>
 
   <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+    {% autoescape off %}
+
+    {%for object in objects%}
     <div class="">
       <div class="titel" style=" background: #efefef78;">
-        <h1>About</h1>
+        <h1>{{object.title}}</h1>
 
       </div>
       <div class="body">
         <p>
-      Covid-Tracker and Covid-Api is run by an only one  developer with the goal of making  statistics report of Corona Virus  available in a thought-provoking and time relevant format to a wide audience around the world. It is published by a small and independent only one developer in Bangladesh. We have no political, governmental, or corporate affiliation.
+          {{object.body|safe}}
         </p>
+        {%if form%}
+        <form class="" action="" method="post">
+          {% csrf_token %}
+
+          {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+          {% endfor %}
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+              {% for error in form.non_field_errors %}
+                {{ error }}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% for field in form.visible_fields %}
+            <div class="form-group">
+              {{ field.label_tag }}
+
+              {% if form.is_bound %}
+                {% if field.errors %}
+                  {% render_field field class="form-control  is-invalid" %}
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                      {{ error }}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {% render_field field class="form-control  is-valid" %}
+                {% endif %}
+              {% else %}
+                {% render_field field class="form-control hello" placeholder=field.label %}  <!--when the from render at first with no error this line of code exicute!-->
+              {% endif %}
+
+              {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <input type="submit" class="btn" name="" value="submit">
+        </form>
+        {%endif%}
       </div>
     </div>
-    <div class="">
-      <div class="titel" style=" background: #efefef78;">
-        <h1>How it works</h1>
+    {%endfor%}
 
-      </div>
-      <div class="body">
-        <p>
-            For the COVID-19 data, we collect data from official reports,
-            and Data was Scrap form International website  like <a href="https://www.worldometers.info/">Worldometer</a> and other .
+{% endautoescape %}
 
-        </p>
-      </div>
-    </div>
+
 
 
   </div>
