@@ -10,9 +10,12 @@ def display(request):
     try:
 
         qs=Country.objects.get(country_name__icontains='World')
+        objects=Country.objects.all()[1:]
+        
         ctx={
-        'total_cases':qs.total_cases,
-        'total_death':qs.total_death,
+        'world':qs,
+
+        'objects':objects
         }
     except:
         pass

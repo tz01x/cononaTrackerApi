@@ -2,7 +2,7 @@
 {%extends 'base2.html'%}
 {% load static %}
 {%block title%}
-COVID-19 update : {{total_cases}} cases and {{total_death}} deaths
+COVID-19 update : {{world.total_cases}} cases and {{world.total_death}} deaths
 {%endblock%}
 
 {% block content %}
@@ -12,17 +12,17 @@ COVID-19 update : {{total_cases}} cases and {{total_death}} deaths
     border: 0px;
     border-radius: 15px;
     min-height: 158px;
-    animation: feidin 2s forwards;
+    /* animation: feidin 1s forwards; */
 }
 
-@keyframes feidin {
+/* @keyframes feidin {
   0%{
     opacity: 0;
   }
   100%{
     opacity: 1;
   }
-}
+} */
 .card-header {
     padding: 2px;
     text-align: center;
@@ -30,10 +30,11 @@ COVID-19 update : {{total_cases}} cases and {{total_death}} deaths
 }
 .mui-row {
     display: flex;
+    min-height: 49px;
 }
 .mui-col-xs-6 {
   /* flex-grow: 1; */
-  height: 27px;
+  /* height: 27px; */
   width: 50%;
   /* text-align: center; */
   border-left: 1px solid #00000075;
@@ -74,7 +75,7 @@ text-decoration-style: wavy;
 .pure-material-progress-circular:indeterminate {
     -webkit-mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
     mask-image: linear-gradient(transparent 50%, black 50%), linear-gradient(to right, transparent 50%, black 50%);
-    animation: pure-material-progress-circular 3s infinite cubic-bezier(0.3, 0.6, 1, 1);
+    animation: pure-material-progress-circular 5s infinite cubic-bezier(0.3, 0.6, 1, 1);
 }
 
 :-ms-lang(x), .pure-material-progress-circular:indeterminate {
@@ -167,6 +168,50 @@ text-decoration-style: wavy;
         transform: rotate(225deg);
     }
 }
+.main-header-section{
+
+}
+.main-header-section-title{
+background: lightgray;
+padding: 3px;
+margin: 5px 0px 14px 0px;
+font-weight: 600;
+font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+}
+.main-header-section-body{
+  display: flex;
+  justify-content: center;
+    margin-top: 5px;
+}
+.main-header-section-body .title{
+  width: 40%;
+  font-size: calc(25px + (30 - 16) * ((100vw - 300px) / (1600 - 300)));
+  align-self: center;
+  /* margin-top: 10px; */
+  font-weight: 500;
+  font-family: sans-serif;
+}
+.main-header-section-body .discription{
+  text-align: left;
+}
+.main-header-section-body .discription hr{
+      border-top: 2px solid #373c56;;
+}
+.discription-row{
+  font-size: calc(16px + (30 - 25) * ((100vw - 300px) / (1600 - 300)));
+display:flex;
+flex-flow: column;
+min-width: 10vw;
+}
+.discription-number{
+  margin-top: 5%;
+  font-weight: 600;
+}
+.discription-text{
+  /* width: 115px;+ */
+}
+
+
 
 </style>
 
@@ -182,7 +227,120 @@ text-decoration-style: wavy;
 
     <div class="main-section"  id='main'>
       <div class="" style=" text-align:center">
+        <div class="main-header-section">
+          <div class="main-header-section-title">
+            <h4>COVID-19 CORONAVIRUS PANDEMIC</h4>
+          </div>
+          <div class="" style="font-size: 10px;">
+                Last update : {{world.create|date:"d M Y, G:i A e"}}
+          </div>
+
+          <div class="main-header-section-body">
+            <div class="title">
+              World
+            </div>
+            <div class="discription">
+              <div class="discription-row" style="">
+                <div class="discription-text" >
+                  Cases :
+                </div>
+                <div class="discription-number">
+                    {{world.total_cases}}
+                </div>
+
+              </div>
+
+              <hr>
+              <div class="discription-row" style="display:flex">
+                <div class="discription-text" >Recovered :</div>
+                <div class="discription-number" style="    font-size: larger; color: #26b12cd1;">
+                    {{world.total_recover}}
+                </div>
+
+              </div>
+
+              <hr>
+              <div class="discription-row" style="display:flex">
+                <div class="discription-text" >
+                  Death :
+                </div>
+                <div class="discription-number" style="color: #ca0303b3;">
+                    {{world.total_death}}
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="">
+            <div class="" style="text-align:right;  margin-top: 7px;">
+
+                  <a href="./details/World/">more details ...</a>
+            </div>
+            <div class="" style="text-align:left; margin-top:5px">
+              The coronavirus COVID-19 is affecting <strong>{{objects.count}} countries</strong> and territories around the world and 2 international conveyances.
+            </div>
+
+            <h6 style="text-align:left">
+                Confirmed Cases and Deaths by Country.
+            </h6>
+          </div>
+        </div>
+      <div class="">
         <progress class="pure-material-progress-circular" id='progress-bar' style="display:inline-block" />
+      </div>
+
+        {%for object in objects%}
+            <div class="cards" >
+              <div class="card-header">
+                  <h5>
+                  <a href="/details/{{object.country_name}}">
+                  {{object.country_name}}
+                  </a>
+                  </h5>
+              </div>
+              <div class="card-body">
+
+                  <div class="mui-row">
+                      <div class="mui-col-xs-6">
+
+                      <div class="mui-col-text">
+                      New Cases : <strong class='number'>+{{object.new_case}} </strong>
+                      </div>
+
+                      </div>
+                      <div class="mui-col-xs-6">
+
+                      <div class="mui-col-text">
+                      New Death : <strong class='number'>+{{object.new_death}}</strong>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="mui-row">
+                      <div class="mui-col-xs-6">
+                      <div class="mui-col-text">
+                      Total Cases: {{object.total_cases}}
+
+                      </div>
+
+                      </div>
+                      <div class="mui-col-xs-6">
+                      <div class="mui-col-text">
+                      Total Death:  {{object.total_death}}
+                      </div>
+
+
+                      </div>
+                  </div>
+                  <div style="height:15px"></div>
+
+              </div>
+            </div>
+            <br>
+        {%endfor%}
+
       </div>
 
 
@@ -247,11 +405,11 @@ function cardhtml(country_name,new_case,new_death,total_cases,total_death,i){
 
 //main section refereance
 let mainSection=document.getElementById('main');
-featchallData();
+// featchallData();
 //set timeout for loding to gone
 setTimeout(function(){
       document.getElementById('progress-bar').style.display='none';
-},5000)
+},2000)
 
 //listenign to Enter evetn on Search input fild
 document.getElementById('fixed-header-drawer-exp').addEventListener('keyup',function (event) {
@@ -292,10 +450,18 @@ function featchallData(){
   fetch("{{request.scheme}}://{{request.get_host}}{%url 'main_api:getalldata'%}").then(function(res){
     return res.json()
   }).then(function(data){
-  //  console.log();
-    data.forEach((item, i) => {
-      mainSection.innerHTML+=cardhtml(item.country_name,item.new_case,item.new_death,item.total_cases,item.total_death,i);
-    });
+   console.log("here");
+   console.log(data);
+    // data.forEach((item, i) => {
+    //   mainSection.innerHTML+=cardhtml(item.country_name,item.new_case,item.new_death,item.total_cases,item.total_death,i);
+    // });
+    // for (var i = 0; i < data.length; i++) {
+    //   var item=data[i];
+    //   mainSection.innerHTML+=cardhtml(item.country_name,item.new_case,item.new_death,item.total_cases,item.total_death,i);
+    //
+    // }
+
+    console.log("finsh");
 
 
 
