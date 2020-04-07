@@ -54,7 +54,7 @@ class  Country(models.Model):
     active_cases=models.CharField(max_length=250,null=True)
     total_case_per_minion_pop=models.CharField(max_length=250,null=True)
     total_death_per_minion_pop=models.CharField(max_length=250,null=True)
-    create=models.DateField(auto_now=True,db_index=True)
+    create=models.DateTimeField(auto_now=True,db_index=True)
     new_cases=models.ManyToManyField('NewCases',related_name="newcases")
     new_case=models.IntegerField(blank=True,default=0)
     new_death=models.IntegerField(blank=True,default=0)
