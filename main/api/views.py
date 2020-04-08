@@ -61,34 +61,61 @@ import json,io,datetime
 def createMessage(request):
     data=request.POST
     print(data)
+    isyesterday=data.get('yesterday',None)
+
+
     try:
 
         obj,isCreated=Country.objects.get_or_create(country_name=data.get('country_name'))
 
         if obj:
-            obj.total_cases=data.get('total_cases')
-            obj.total_death=data.get('total_death')
-            obj.total_recover=data.get('total_recover')
-            obj.active_cases=data.get('active_cases')
-            obj.total_case_per_minion_pop=data.get('total_case_per_minion_pop')
-            obj.total_death_per_minion_pop=data.get('total_death_per_minion_pop')
-            obj.new_case=data.get('new_cases')
-            obj.new_death=data.get('new_death')
-            obj.save()
-            if obj.new_cases.all().last().date==datetime.datetime.now().date():
-                # update today cases
-                last_new_case=obj.new_cases.all().last()
-                last_new_case.new_cases=obj.new_case
-                last_new_case.new_death=obj.new_death
-                last_new_case.save()
-            else:
-                #create new one
+            if isCreated and isyesterday:
+                obj.total_cases=data.get('total_cases')
+                obj.total_death=data.get('total_death')
+                obj.total_recover=data.get('total_recover')
+                obj.active_cases=data.get('active_cases')
+                obj.total_case_per_minion_pop=data.get('total_case_per_minion_pop')
+                obj.total_death_per_minion_pop=data.get('total_death_per_minion_pop')
+                obj.new_case=data.get('new_cases')
+                obj.new_death=data.get('new_death')
+                obj.save()
                 newcases=NewCases.objects.create(
                 country=obj,
                 new_cases=data.get('new_cases'),
                 new_death=data.get('new_death')
                 )
                 obj.new_cases.add(newcases)
+            elif isyesterday:
+                last_new_case=obj.new_cases.all().last()
+                last_new_case.new_cases=data.get('new_cases')
+                last_new_case.new_death=data.get('new_death')
+                last_new_case.save()
+            else:
+                obj.total_cases=data.get('total_cases')
+                obj.total_death=data.get('total_death')
+                obj.total_recover=data.get('total_recover')
+                obj.active_cases=data.get('active_cases')
+                obj.total_case_per_minion_pop=data.get('total_case_per_minion_pop')
+                obj.total_death_per_minion_pop=data.get('total_death_per_minion_pop')
+                obj.new_case=data.get('new_cases')
+                obj.new_death=data.get('new_death')
+                obj.save()
+
+
+                if obj.new_cases.all().last().date==datetime.datetime.now().date():
+                    # update today cases
+                    last_new_case=obj.new_cases.all().last()
+                    last_new_case.new_cases=obj.new_case
+                    last_new_case.new_death=obj.new_death
+                    last_new_case.save()
+                else:
+                    #create new one
+                    newcases=NewCases.objects.create(
+                    country=obj,
+                    new_cases=data.get('new_cases'),
+                    new_death=data.get('new_death')
+                    )
+                    obj.new_cases.add(newcases)
 
 
     except:
