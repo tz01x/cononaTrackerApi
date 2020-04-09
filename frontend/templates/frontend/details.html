@@ -58,8 +58,8 @@ line-height: 1;
 
     font-size: 43px;
     padding: 2px;
-    font-weight: 700;
-    text-shadow: 0px 2px 2px black;
+    font-weight: 500;
+    text-shadow: 0px 1px 2px black;
 
 }
 .nre{
@@ -70,6 +70,10 @@ font-size: 57px;
 font-weight: 600;
 color: #70ec51;
 text-shadow: 0px 0.5px 3px #061f0b;
+}
+.resf{
+  font-size: calc(27px + (30 - 25) * ((100vw - 300px) / (1600 - 300)));
+
 }
 </style>
 
@@ -92,17 +96,17 @@ text-shadow: 0px 0.5px 3px #061f0b;
       </div>
       <div class="body">
         <div class="t cs">
-          <div class="cst">
+          <div class="cst resf ">
 
             Coronavirus Cases:
           </div>
-          <div class="t ncs">
+          <div class="t ncs ">
 
             {{qs.total_cases}}
           </div>
         </div>
         <div class="t d">
-          <div class="dt">
+          <div class="dt resf">
             Deaths:
 
           </div>
@@ -112,7 +116,7 @@ text-shadow: 0px 0.5px 3px #061f0b;
           </div>
         </div>
         <div class="t re">
-          <div class="ret">
+          <div class="ret resf">
             Total Recovered:
 
           </div>
@@ -120,10 +124,12 @@ text-shadow: 0px 0.5px 3px #061f0b;
             {{qs.total_recover}}
           </div>
         </div>
-        <h3>Daily New Cases in {{qs}}</h3>
+        <hr>
+        <h3 class="resf">Daily New CORONAVIRUS Cases in {{qs}}</h3>
         <canvas id="myChart_new_case"></canvas>
         <br>
-        <h3>Daily New Death in {{qs}}</h3>
+        <hr>
+        <h3 class="resf">Daily New Death in {{qs}}</h3>
         <canvas id="myChart_new_death"></canvas>
       </div>
 
