@@ -59,7 +59,7 @@ class  Country(models.Model):
     new_case=models.IntegerField(blank=True,default=0)
     new_death=models.IntegerField(blank=True,default=0)
     class Meta:
-            ordering = ['-new_case','-new_death']
+            ordering = ['-new_case','-new_death','-create']
     def __str__(self):
         return self.country_name
 

@@ -65,7 +65,8 @@ def createMessage(request):
 
 
     try:
-
+        if len(data.get('country_name'))<1:
+            return Response({'detail':"country name is not valid "},status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         obj,isCreated=Country.objects.get_or_create(country_name=data.get('country_name'))
 
         if obj:
@@ -91,6 +92,7 @@ def createMessage(request):
                 last_new_case.new_death=data.get('new_death')
                 last_new_case.save()
             else:
+                #  include yesterday is false
                 obj.total_cases=data.get('total_cases')
                 obj.total_death=data.get('total_death')
                 obj.total_recover=data.get('total_recover')
