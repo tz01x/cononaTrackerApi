@@ -31,11 +31,15 @@ def CrateOrUpdate(request):
         division=request.POST.get('division',None)
         city=request.POST.get('city',None)
         namberofCases=request.POST.get('namberofCases',None)
+        # print(division)
+        # print(city)
+        # print(namberofCases)
         if division and city and namberofCases:
             division_obj,c=Division.objects.get_or_create(
             division=division,
             )
-            cityobjs=City.objects.filter(divi=division_obj,city=city)
+            cityobjs=City.objects.all().filter(divi=division_obj,city=city)
+
             if len(cityobjs)==1:
                 # update
                 cityobj=cityobjs[0]
@@ -43,13 +47,16 @@ def CrateOrUpdate(request):
                 cityobj.save()
             elif len(cityobjs)==0:
                 # crate
-                cityobj=City.objects.create(
+                _cityobj=City.objects.create(
                 divi=division_obj,
                 city=city,
-                namberofCases=namberofCases
+                namberofCases=namberofCases,
+                date=division_obj.date
                 )
+                _cityobj.save()
+                print(_cityobj.id,_cityobj)
 
-                division_obj.city.add(cityobj)
+                division_obj.city.add(_cityobj)
                 division_obj.save()
             return Response({'details':"created"},status=status.HTTP_200_OK)
 
