@@ -25,7 +25,7 @@ class BangladeshDivisions(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([])
+@permission_classes([IsAuthenticated])
 def CrateOrUpdate(request):
     try:
         division=request.POST.get('division',None)
