@@ -8,9 +8,12 @@ class CitySerilizer(serializers.ModelSerializer):
 
 class DivisionSerializer(serializers.ModelSerializer):
     city=CitySerilizer(many=True)
+    date= serializers.DateTimeField(format="%B %d, %Y", required=False, read_only=True)
+
     class Meta:
         model=Division
         fields=[
         'division',
         'city',
+        'date'
         ]

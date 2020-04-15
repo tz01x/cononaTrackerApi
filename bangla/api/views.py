@@ -31,13 +31,20 @@ def CrateOrUpdate(request):
         division=request.POST.get('division',None)
         city=request.POST.get('city',None)
         namberofCases=request.POST.get('namberofCases',None)
+        date=request.POST.get('date',None)
+        # 'April 14, 2020'
+        if date:
+            date=datetime.datetime.strptime(date,'%B %d, %Y')
         # print(division)
         # print(city)
         # print(namberofCases)
-        if division and city and namberofCases:
+        if division and city and namberofCases and date:
             division_obj,c=Division.objects.get_or_create(
             division=division,
             )
+            division_obj.date=date
+            division_obj.save()
+
             cityobjs=City.objects.all().filter(divi=division_obj,city=city)
 
             if len(cityobjs)==1:
@@ -64,4 +71,4 @@ def CrateOrUpdate(request):
 
     except Exception as e:
         pass
-    return Response({'details':"error occor"},status=status.HTTP_200_OK)
+    return Response({'details':"error occor"},status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
