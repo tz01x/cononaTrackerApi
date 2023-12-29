@@ -132,3 +132,4 @@ from .dev_settings import  *
 from .cors_header import  *
 from .restSetting import  *
 from .pwa_settings import  *
+SESSION_COOKIE_SECURE = True
